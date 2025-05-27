@@ -20,12 +20,15 @@ if [ "$1" = 'node-red' ]; then
 
     # if no configfile is provided, generate one based on the environment variables
     if [ ! -f /config/settings.js ]; then
-
-        # use dist config file and replace settings
-        sed -e "s#//flowFile: '.*'#flowFile: '$NODE_RED_FLOW_FILE'#" \
-            -e "s#//userDir: '.*'#userDir: '$NODE_RED_USER_DIR'#" \
-            \
-            /config/settings.js.dist > /config/settings.js
+        # use dist config file and replace settings, or copy default if dist doesn't exist
+        if [ -f /config/settings.js.dist ]; then
+            sed -e "s#//flowFile: '.*'#flowFile: '$NODE_RED_FLOW_FILE'#" \
+                -e "s#//userDir: '.*'#userDir: '$NODE_RED_USER_DIR'#" \
+                /config/settings.js.dist > /config/settings.js
+        else
+            # Copy default settings if dist file doesn't exist
+            cp /usr/src/node-red/node_modules/node-red/settings.js /config/settings.js
+        fi
     fi
 fi
 
