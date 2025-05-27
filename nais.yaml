@@ -18,11 +18,11 @@ spec:
     port: 1880
   resources:
     limits:
-      cpu: 100m
-      memory: 32Mi
+      cpu: 500m
+      memory: 500Mi
     requests:
       cpu: 100m
-      memory: 32Mi
+      memory: 100Mi
   replicas:
     min: 1
     max: 2
