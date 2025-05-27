@@ -6,7 +6,8 @@ USER root
 # Optional: install additional nodes (replace with your actual needs)
 RUN npm install node-red-dashboard
 
-# Copy the custom entrypoint script
+# Create necessary directories and copy the custom entrypoint script
+RUN mkdir -p /config
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
