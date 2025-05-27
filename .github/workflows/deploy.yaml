@@ -31,7 +31,7 @@ jobs:
       image: ${{ steps.docker-build-push.outputs.image }}
 
   deploy-prod:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     name: Deploy to prod-gcp
     needs: build
     environment: production
