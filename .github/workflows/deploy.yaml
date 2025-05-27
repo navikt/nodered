@@ -1,0 +1,42 @@
+name: 'Deploy main'
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    name: 'build'
+    runs-on: 'ubuntu-latest'
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+      - uses: 'actions/checkout@v4'
+      - name: 'Build and push'
+        uses: nais/docker-build-push@v0
+        id: docker-build-push
+        with:
+          team: team-researchops
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: 'actions/checkout@v4'
+      - name: 'Deploy'
+        uses: 'nais/deploy/actions/deploy@v2'
+        env:
+          CLUSTER: 'prod-gcp'
+          RESOURCE: nais.yaml
+          VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
