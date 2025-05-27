@@ -30,6 +30,9 @@ if [ "$1" = 'node-red' ]; then
             cp /usr/src/node-red/node_modules/node-red/settings.js /config/settings.js
         fi
     fi
+    
+    # Start Node-RED with explicit parameters
+    exec node-red --userDir "$NODE_RED_USER_DIR" --settings /config/settings.js
 fi
 
 exec "$@"
