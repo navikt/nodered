@@ -1,6 +1,8 @@
 # Use the official Node-RED base image
 FROM nodered/node-red:latest
 
+USER root
+
 # Optional: install additional nodes (replace with your actual needs)
 RUN npm install node-red-dashboard
 
