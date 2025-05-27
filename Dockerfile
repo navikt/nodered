@@ -6,12 +6,9 @@ USER root
 # Optional: install additional nodes (replace with your actual needs)
 RUN npm install node-red-dashboard
 
-# Create an entrypoint script to fix permissions at runtime
-RUN echo '#!/bin/bash\n\
-chown -R node-red:node-red /data\n\
-chmod -R 775 /data\n\
-su node-red -c "npm start -- --userDir /data"\n\
-' > /entrypoint.sh && chmod +x /entrypoint.sh
+# Copy the custom entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Switch back to node-red user for proper permissions
 USER node-red
@@ -23,5 +20,6 @@ USER node-red
 # Expose the default Node-RED port
 EXPOSE 1880
 
-# Use custom entrypoint
-ENTRYPOINT ["/entrypoint.sh"]
+# Use the custom entrypoint
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["node-red"]
