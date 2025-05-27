@@ -10,6 +10,18 @@ metadata:
 spec:
   image: {{image}}
   port: 1880
+  
+  # Add persistent storage for Node-RED data
+  filesFrom:
+    - persistentVolumeClaim: nodered-data
+      mountPath: /data
+  
+  # Allow running as root due to permission complexities
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    fsGroup: 0
+
   liveness:
     path: /
     initialDelay: 20
