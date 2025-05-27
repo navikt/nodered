@@ -6,10 +6,12 @@ USER root
 # Optional: install additional nodes (replace with your actual needs)
 RUN npm install node-red-dashboard
 
-# Ensure /data directory exists and has proper permissions
-RUN mkdir -p /data && \
-    chown -R node-red:node-red /data && \
-    chmod -R 775 /data
+# Create an entrypoint script to fix permissions at runtime
+RUN echo '#!/bin/bash\n\
+chown -R node-red:node-red /data\n\
+chmod -R 775 /data\n\
+su node-red -c "npm start -- --userDir /data"\n\
+' > /entrypoint.sh && chmod +x /entrypoint.sh
 
 # Switch back to node-red user for proper permissions
 USER node-red
@@ -21,4 +23,5 @@ USER node-red
 # Expose the default Node-RED port
 EXPOSE 1880
 
-# Use the default entrypoint and command from the base image
+# Use custom entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
