@@ -11,9 +11,11 @@ spec:
   liveness:
     path: /
     initialDelay: 20
+    port: 1880
   readiness:
     path: /
     initialDelay: 20
+    port: 1880
   resources:
     limits:
       cpu: 100m
