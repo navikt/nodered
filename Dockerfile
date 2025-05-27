@@ -6,6 +6,9 @@ USER root
 # Optional: install additional nodes (replace with your actual needs)
 RUN npm install node-red-dashboard
 
+# Fix ownership of /data directory
+RUN chown -R node-red:node-red /data
+
 # Switch back to node-red user for proper permissions
 USER node-red
 
