@@ -12,9 +12,6 @@ spec:
   port: 1880
   envFrom:
     - secret: nodered-keys
-  filesFrom:
-    - secret: nodered-keys
-      mountPath: /usr/src
   accessPolicy:
     outbound:
       external:
