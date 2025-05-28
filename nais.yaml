@@ -22,10 +22,6 @@ spec:
         - host: accounts.google.com
           ports:
             - port: 443
-        - ipv4: 74.125.131.84
-        - ipv4: 108.177.14.84
-        - ipv4: 173.194.221.84
-        - ipv4: 64.233.164.84
   liveness:
     path: /
     initialDelay: 20
