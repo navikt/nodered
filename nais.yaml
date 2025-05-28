@@ -10,6 +10,26 @@ metadata:
 spec:
   image: {{image}}
   port: 1880
+  accessPolicy:
+  outbound:
+    external:
+      - host: bigquery.googleapis.com
+        ports:
+          - port: 443
+      - host: oauth2.googleapis.com
+        ports:
+          - port: 443
+      - host: accounts.google.com
+        ports:
+          - port: 443
+      - ipv4: 74.125.131.84
+      - ipv4: 74.125.0.0/16
+      - ipv4: 108.177.0.0/16
+      - ipv4: 172.217.0.0/16
+      - ipv4: 142.250.0.0/15
+      - ipv4: 108.177.14.84
+      - ipv4: 173.194.221.84
+      - ipv4: 64.233.164.84
   liveness:
     path: /
     initialDelay: 20
