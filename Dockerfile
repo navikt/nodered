@@ -4,7 +4,7 @@ FROM nodered/node-red:latest
 USER root
 
 # Install additional nodes
-RUN npm install node-red-dashboard
+RUN npm install node-red-contrib-bigquery
 
 # Copy custom settings and flows
 COPY settings.js /data/settings.js
