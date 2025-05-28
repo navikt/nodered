@@ -14,7 +14,7 @@ spec:
     - secret: nodered-keys
   filesFrom:
     - secret: nodered-keys
-      mountPath: /usr/src/node-red
+      mountPath: /usr/src
   accessPolicy:
     outbound:
       external:
