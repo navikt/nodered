@@ -10,9 +10,6 @@ metadata:
 spec:
   image: {{image}}
   port: 1880
-  filesFrom:
-    - persistentVolumeClaim: nodered-data
-      mountPath: /data
   liveness:
     path: /
     initialDelay: 20

@@ -6,6 +6,10 @@ USER root
 # Install additional nodes
 RUN npm install node-red-dashboard
 
+# Copy custom settings and flows
+COPY settings.js /data/settings.js
+COPY flows.json /data/flows.json
+
 # Set proper environment variables and create directories
 ENV HOME=/data
 RUN mkdir -p /data && chmod 777 /data
