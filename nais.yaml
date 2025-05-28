@@ -12,6 +12,9 @@ spec:
   port: 1880
   envFrom:
     - secret: nodered-keys
+  filesFrom:
+    - secret: nodered-keys
+      mountPath: /var/run/secrets/nodered
   accessPolicy:
     outbound:
       external:
