@@ -1,1 +1,71 @@
-[]
+[
+    {
+        "id": "a2d6f9775eefb8a1",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "908387c82048948f",
+        "type": "bigquery-config"
+    },
+    {
+        "id": "dbadbb82bf77d905",
+        "type": "inject",
+        "z": "a2d6f9775eefb8a1",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"hello\":\"smile\"}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "4bfd29a85e402994"
+            ]
+        ]
+    },
+    {
+        "id": "4bfd29a85e402994",
+        "type": "json",
+        "z": "a2d6f9775eefb8a1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 310,
+        "y": 80,
+        "wires": [
+            [
+                "e9d531c6aecb03cc"
+            ]
+        ]
+    },
+    {
+        "id": "e9d531c6aecb03cc",
+        "type": "bigquery insert",
+        "z": "a2d6f9775eefb8a1",
+        "bigquery": "908387c82048948f",
+        "dataset": "nodered",
+        "table": "nodered",
+        "name": "nodered",
+        "x": 440,
+        "y": 80,
+        "wires": []
+    }
+]
