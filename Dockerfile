@@ -5,7 +5,6 @@ USER root
 
 # Install additional nodes
 RUN npm install node-red-contrib-bigquery
-RUN npm install node-red-contrib-google-cloud
 
 # Copy custom settings and flows
 COPY settings.js /data/settings.js
